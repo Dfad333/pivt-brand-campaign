@@ -1,0 +1,9 @@
+# Normalise line endings in the repo so the studio code stays identical across machines.
+* text=auto eol=lf
+
+# Never let git touch the imagery.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.mp4 binary
+*.mov binary

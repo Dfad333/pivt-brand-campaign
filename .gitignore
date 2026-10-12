@@ -1,0 +1,12 @@
+# Source photographs from Higgsfield (~1.3 GB) and motion renders (~4.4 GB).
+# Deliberately not tracked — they would make the repo far too heavy to clone
+# comfortably, and neither is needed to CREATE new content. See SETUP-LAPTOP.md
+# for how to carry them across if you want to re-cut an existing poster's type.
+raw/
+motion/
+
+__pycache__/
+*.pyc
+
+.DS_Store
+Thumbs.db
