@@ -316,3 +316,14 @@ build("receipt", OUT + "111-you-keep-the-time.jpg", "Itemised.",
        ("Second-guessing", "Removed")],
       "You keep", "THE TIME.",
       "Every line on this slip is something you stop doing yourself.", bg=(255, 92, 0))
+
+build("knockout", RAW + "112-paper-offcuts.png", OUT + "112-edit.jpg",
+      "EDIT.", "What you cut is the work.",
+      "Anyone can add. The difference between a feed and a brand is everything that "
+      "never made it in.",
+      "Less, on purpose.", sub_bar=(17, 17, 17))
+
+build("lb_statement", RAW + "113-limestone-gallery.png", OUT + "113-nothing-goes-up.jpg",
+      PN + "13", "Nothing goes up|until it is ready.",
+      "We would rather show you one finished thing than ten almost-finished ones.",
+      "PivtMedia", head_y=0.70)   # dark zone is the polished floor

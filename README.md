@@ -21,6 +21,11 @@ Two folders reflect this:
   type without paying to regenerate.
 - **`final/`** — finished posters, 1600×2000 (4:5).
 
+Both folders stay **on this device only** — they're in `.gitignore`. The GitHub repo is the
+setup repo (code, docs, logos, the `/pivtcontent` command) for getting a new machine
+running; it is not where content is stored. The original reference set of posters in
+`final/` is still tracked, but nothing new you make gets committed.
+
 ---
 
 ## Producing a poster

@@ -85,10 +85,11 @@ Normal git. Before you start on either machine:
 git pull
 ```
 
-After a session that produced posters you want to keep:
+After a session that changed the **setup** (code, layouts, docs). Posters themselves stay
+local: `final/` and `raw/` are ignored by git.
 
 ```bash
-git add final/ studio/ && git commit -m "feat: add <what you made>" && git push
+git add studio/ *.md && git commit -m "<what changed>" && git push
 ```
 
 The one rule: **don't build on both machines at once without pulling first.** `final/` is

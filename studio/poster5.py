@@ -50,7 +50,8 @@ def poster_diptych(photo_path, out_path, l1, l2, kicker, micro, panel=ORANGE,
 
 
 # ------------------------------------------------------------ B: knockout
-def poster_knockout(photo_path, out_path, word, sub, micro_l, micro_r, band=ORANGE):
+def poster_knockout(photo_path, out_path, word, sub, micro_l, micro_r, band=ORANGE,
+                    sub_bar=None):
     img = cover(Image.open(photo_path).convert("RGB"), W, H).convert("RGBA")
     scrim_bottom(img, height_frac=0.30, strength=180)
     draw = ImageDraw.Draw(img)
@@ -76,7 +77,12 @@ def poster_knockout(photo_path, out_path, word, sub, micro_l, micro_r, band=ORAN
     # pick ink from that ground rather than assuming a dark image
     fs = font(F_BOLD, 30)
     sw = track_width(draw, sub.upper(), fs, 4.0)
-    sub_light = mean_lum(img, (int(W * 0.2), by1 + 34, int(W * 0.8), by1 + 78)) >= 125
+    # On a busy ground no single ink survives — sub_bar gives the line its own solid ground.
+    if sub_bar:
+        draw.rectangle([(W - sw) / 2 - 28, by1, (W + sw) / 2 + 28, by1 + 100], fill=sub_bar)
+        sub_light = mean_lum(img, (int(W * 0.45), by1 + 40, int(W * 0.55), by1 + 70)) >= 125
+    else:
+        sub_light = mean_lum(img, (int(W * 0.2), by1 + 34, int(W * 0.8), by1 + 78)) >= 125
     track_text(draw, ((W - sw) / 2, by1 + 40), sub.upper(), fs,
                (22, 20, 18) if sub_light else (255, 255, 255), 4.0)
 

@@ -321,6 +321,7 @@ incrementing, and **change the palette every issue**.
 | 10 | Blank billboard at dusk | Cool slate |
 | 11 | Archive of blank-spined volumes | B&W |
 | 12 | Green marble corridor | Deep green |
+| 13 | Limestone gallery, single empty plinth | Cool stone |
 
 **`head_y` must be chosen per image.** The default assumes a dark lower-middle. On the
 Santorini shot the bright plaster was below and the dark sea above, so the headline moved to

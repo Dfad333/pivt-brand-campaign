@@ -10,3 +10,9 @@ __pycache__/
 
 .DS_Store
 Thumbs.db
+
+# New content stays on the device that made it. This repo is the SETUP repo —
+# code, docs, logos, the /pivtcontent command — not a content archive.
+# The posters that were already tracked before this rule stay tracked as the
+# reference set; anything new in final/ is ignored and saved locally only.
+final/
