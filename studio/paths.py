@@ -21,7 +21,6 @@ ROOT = os.environ.get(
 RAW = os.path.join(ROOT, "raw")
 FINAL = os.path.join(ROOT, "final")
 ARCHIVE = os.path.join(ROOT, "archive")
-MOTION = os.path.join(ROOT, "motion")
 REFERENCES = os.path.join(ROOT, "references")
 LOGO_DIR = os.path.join(ROOT, "brand", "logo")
 CONTACT_SHEET = os.path.join(ROOT, "CONTACT-SHEET.jpg")

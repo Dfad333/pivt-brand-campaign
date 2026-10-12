@@ -141,7 +141,7 @@ Quiet cinematic luxury. The opposite register to BOEGÖW — use it deliberately
 3. **Every poster in a batch must use a DIFFERENT layout.** Repetition of arrangement gets
    noticed far faster than repetition of subject. **Carousels invert this rule** — every
    slide keeps the same layout and geometry so the swipe feels continuous; only the image
-   and the line change. See §11.
+   and the line change. See §10.
 4. **Orange is the only accent.** Blue as a large flat colour field was explicitly rejected.
    Secondary colours are fine *inside* a treatment (e.g. a two-colour halftone) but never as
    a dominant block.
@@ -359,60 +359,7 @@ Use Higgsfield `remove_background` — it takes an uploaded `media_id` or a gene
 
 ---
 
-## 11. MOTION PIECES
-
-Same method as a poster, one extra step: **generate the still text-free → animate the still →
-burn the type over the clip.** Never prompt a video model for the headline; it garbles
-letterforms *and* wobbles them frame to frame.
-
-`studio/motion.py` is the module. Unlike every other layout it returns the type as a
-**transparent RGBA layer** rather than a flattened JPG, so the same artwork can be composited
-over video with ffmpeg:
-
-```python
-from motion import type_layer
-type_layer("overlay.png", 1080, 1340, headline="CONTENT ON TAP.",
-           foot="PIVT + MEDIA //", ink=(17,17,17), foot_bar=INK)
-```
-
-```bash
-ffmpeg -i raw.mp4 -i overlay.png -filter_complex "[0:v][1:v]overlay=0:0" -c:v libx264 -crf 17 -pix_fmt yuv420p out.mp4
-```
-
-**Model notes (checked 2026-08-15).** Kling on our account only offers **16:9 / 9:16 / 1:1 —
-no 4:5**, so it cannot hold the feed format. Use **`minimax_h3` with `aspect_ratio:"auto"`**
-(derives the ratio from the start frame — returned a true 1440×1792) or **`minimax_hailuo`**
-(1080×1340). Both take the still via `medias: [{role:"start_image", value:<job_id>}]`. The
-video tools may refuse a submission and recommend a preset instead — retry the same call with
-`declined_preset_id` set to the id in the error.
-
-**Quote the credit cost before generating anything** (Tarek, 2026-08-15). `generate_image` and
-`generate_video` accept `get_cost: true`, which returns the cost without submitting a job — run
-it, state the number, then generate. The `*_batch` tools do **not** support `get_cost`, so
-preflight one representative request and multiply. Baseline: Nano Banana Pro still (4:5, 4k)
-= 4 credits · Hailuo 2.3 ~6s = 10 · MiniMax H3 ~6.6s = 24. Rerolls cost full price — price a
-reroll before firing it.
-
-**Default duration is 10 seconds** (Tarek, 2026-08-15 — the first piece ran 6s and he wanted
-longer). `minimax_h3` accepts 4–15; `minimax_hailuo` accepts only 6 or 10. Expect the longer
-run to strain the accumulation: models tend to stall the motion in the back half, so check the
-midpoint *and* the end, and watch that the growing element doesn't overrun its container.
-
-**Prompt the motion in one sentence and negate the camera.** "Locked-off static camera, no
-zoom, no pan, no push" plus the single thing that should move. Long motion prompts make these
-models invent camera moves. The two failure modes to check on every take: the hero object
-slowly deforming, and the accumulating element **not actually accumulating** — the model loops
-the motion without adding volume, which kills the whole idea.
-
-> ⚠️ **The type-contrast rule is harder in motion: the ground moves.** Measure the type band on
-> the **first and last** frames, not just the first. On the tap piece every candidate footer
-> band swung 50–110 luminance as the coil grew, so no fixed ink survived the clip — and the
-> mean said "fine" while the line was actually sitting on diagonal stripes. **The fix is a
-> solid bar**, not an ink flip: `foot_bar=INK` gives the line its own ground on every frame,
-> and a solid accent shape is the house device anyway. An ORANGE bar was tried first and
-> rejected — it melts into the orange wall. Ink reads.
-
-## 12. ASSET LOCATIONS
+## 11. ASSET LOCATIONS
 
 - `brand-campaign/final/` — 47 approved posters
 - `brand-campaign/archive/` — 12 rejected, with `WHY-ARCHIVED.md` explaining each
@@ -422,10 +369,7 @@ the motion without adding volume, which kills the whole idea.
   (regenerate: `python studio/contact_sheet.py`)
 - `brand-campaign/references/` — `REFERENCES.md` (BOEGÖW + LONGEBLACK decoded),
   `DRIVE-FOLDER.md` (the third, retro-editorial set), and the BOEGÖW images in `boegow/`
-- `brand-campaign/motion/` — motion pieces: `raw-*.mp4` (untouched model output),
-  `overlay-*.png` (transparent type layers), and the finished burned clips
-- `brand-campaign/studio/` — the code. `layouts.py` is the entry point;
-  `motion.py` handles video type layers.
+- `brand-campaign/studio/` — the code. `layouts.py` is the entry point.
 - `brand-campaign/studio/recipes/rebuild_all.py` — **every poster, reproducible in one run.**
   Change a headline there and re-run; it re-composites type only, so it costs nothing.
 - `Pivt Media Logos/campaign-overlay/` — the four logo variants

@@ -309,3 +309,10 @@ poster_endcard(OUT + "C4-lead-with-the-point.jpg",
                "Start with the answer.", "PivtMedia visual direction.")
 
 print("\nAll posters rebuilt.")
+
+build("receipt", OUT + "111-you-keep-the-time.jpg", "Itemised.",
+      [("Strategy", "Included"), ("Art direction", "Included"), ("Production", "Included"),
+       ("Edit + delivery", "Included"), ("Guesswork", "Removed"),
+       ("Second-guessing", "Removed")],
+      "You keep", "THE TIME.",
+      "Every line on this slip is something you stop doing yourself.", bg=(255, 92, 0))
