@@ -540,3 +540,32 @@ Two non-obvious constraints found while building it:
 
 Lens art in v1 is a procedural placeholder; swap `make_lens()` for a photoreal top-down
 Higgsfield plate when the connector is back. Nothing else needs to change.
+
+## Portable + git-tracked (2026-10-12)
+
+The campaign folder is now a **git repo** (`E:\PivtMedia\brand-campaign`, first commit
+`054a657`), set up so it can run on Tarek's laptop as well as the desktop. Same Claude
+account does NOT move files — only the Higgsfield connector follows the account; the
+folder, the `/pivtcontent` command and this memory all had to be packaged.
+
+What changed in the code — **do not reintroduce absolute paths**:
+- **`studio/paths.py`** is the single source for every folder and font. It resolves `ROOT`
+  from its own location, so the folder works on any drive/machine. Override with
+  `PIVT_CAMPAIGN_ROOT`. Fonts resolve through `pick_font()` — Windows, then macOS, then
+  Linux candidates — and raise with the full candidate list if none exist.
+- **Logos moved into the repo** at `brand/logo/` (was `E:\PivtMedia\Pivt Media Logos\
+  campaign-overlay\`, which only exists on the desktop). Originals left in place.
+- `poster.py` re-exports `F_BOLD`/`F_REG`/`LOGO_DIR` from `paths`, because every other
+  module imports them from `poster`.
+
+**`raw/` (1.3 GB) and `motion/` (4.4 GB) are gitignored.** Neither is needed to create new
+content; all 58 finished posters live in `final/`. Consequence worth remembering:
+`rebuild_all.py` cannot run anywhere `raw/` is absent — it re-composites type onto those
+source photographs. Copy `raw/` across manually if an old headline needs re-cutting.
+
+`install/` carries what git can't place automatically: `pivtcontent.md` (goes in
+`.claude/commands/`) and `memory/*.md` (import on the new machine). Setup steps are in
+`SETUP-LAPTOP.md`.
+
+Cross-machine rule: **always `git pull` before building.** `final/` is binary JPEGs and git
+cannot merge them — simultaneous work on both machines means resolving by hand.

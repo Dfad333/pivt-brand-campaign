@@ -28,14 +28,10 @@ Of the options, this is the one worth the setup:
   on a `.py` file are silent and ugly.
 - USB / direct copy — one-time only, goes stale the moment you build something.
 
-### On this machine (desktop) — publish once
+### Done already — the repo is live
 
-```bash
-cd /e/PivtMedia/brand-campaign
-gh repo create pivt-brand-campaign --private --source=. --remote=origin --push
-```
-
-That creates the private repo under your account and pushes everything tracked.
+**https://github.com/Dfad333/pivt-brand-campaign** — private, 124 files, branch `master`.
+Nothing more to do on the desktop.
 
 ### On the laptop — clone and wire up
 
