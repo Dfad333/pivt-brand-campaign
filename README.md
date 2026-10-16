@@ -64,7 +64,7 @@ and a headline auto-scaling into the rule beneath it.
 | `poster2.py` … `poster10.py` | Layout implementations. Grouped by when they were built, not by what they do — use `layouts.py` instead of importing these directly. |
 | `mockup.py` | Places a finished poster **into** a photo as a physical print. `probe()` then `place()`. |
 | `contact_sheet.py` | Rebuilds `CONTACT-SHEET.jpg` from everything in `final/`. |
-| `build_logos.py` | Regenerates the four logo overlay variants from the transparent master. |
+| `build_logos.py` | Regenerates the four logo overlay variants from the v2 masters in `brand/logo/v2/`. |
 | `compose.py` | The original simple logo-on-photo compositor (still used by posters 06 and 07). |
 | **`recipes/rebuild_all.py`** | **Every approved poster, in one run.** The single source of truth for what was built and how. Supersedes the older `build_batch*.py`, which are kept for history. |
 

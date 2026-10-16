@@ -11,7 +11,7 @@ from PIL import Image, ImageDraw
 
 from poster import (W, H, MARGIN, ORANGE, INK, PAPER, F_BOLD, font, track_text,
                     track_width, fit_size, wrap, micro_block, paste_logo, cover,
-                    scrim_bottom, mean_lum)
+                    scrim_bottom, mean_lum, LOGO_BLACK)
 
 CREAM = (247, 243, 233)
 OCHRE = (214, 138, 20)
@@ -147,7 +147,9 @@ def poster_receipt(out_path, title, rows, total_label, total, foot, bg=INK,
     # measure the content so the slip is exactly as long as it needs to be
     fw_m = font(F_BOLD, 20)
     foot_lines = wrap(draw, foot.upper(), fw_m, rx1 - rx0 - 92, 1.4)
-    logo_h = int(190 * 341 / 640)
+    # measured from the logo file itself, so the slip stays tight whatever the mark's proportions
+    with Image.open(LOGO_BLACK) as _lg:
+        logo_h = int(190 * _lg.height / _lg.width)
     content_h = (64 + 44 + 62 + 40 + len(rows) * row_h + 26 + 74
                  + 96 + len(foot_lines) * 32 + 54 + logo_h + 86)
     ry0 = max(int(H * 0.05), (H - content_h) // 2)

@@ -39,9 +39,10 @@ concrete wall). Even then, check it letter by letter.
 | Headline face | Helvetica Now / Neue Haas Grotesk Display **Bold** (Arial Bold as substitute) |
 | Headline tracking | **−2%** (tight) |
 | Micro-copy | Same family, ~19–20px, **+1.5 letterspacing**, ALL CAPS |
-| Logo | PivtMedia barcode lockup, ~13% of canvas width |
+| Logo | PivtMedia barcode lockup **v2** (barcode + `⌊ PIVT MEDIA ⌋` in Instrument Sans), ~13% of canvas width |
 
-**Logo files** live in `Pivt Media Logos/campaign-overlay/`:
+**Logo files** live in `brand/logo/` (v2 masters in `brand/logo/v2/`, the retired v1 in
+`brand/logo/archive-v1/` — never use it):
 `pivt-logo-transparent-black.png` (light backgrounds) · `pivt-logo-transparent-white.png`
 (dark backgrounds) · plus flattened on-white / on-black versions.
 
@@ -373,5 +374,5 @@ Use Higgsfield `remove_background` — it takes an uploaded `media_id` or a gene
 - `brand-campaign/studio/` — the code. `layouts.py` is the entry point.
 - `brand-campaign/studio/recipes/rebuild_all.py` — **every poster, reproducible in one run.**
   Change a headline there and re-run; it re-composites type only, so it costs nothing.
-- `Pivt Media Logos/campaign-overlay/` — the four logo variants
+- `brand/logo/` — the four v2 logo variants (rebuild from `brand/logo/v2/` with `studio/build_logos.py`)
 - `.claude/commands/pivtcontent.md` — the scoped entry point; run `/pivtcontent` to start
