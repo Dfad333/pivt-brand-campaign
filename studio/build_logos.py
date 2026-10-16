@@ -1,48 +1,23 @@
-"""Build the 3 canonical PivtMedia campaign logo variants from the transparent barcode lockup."""
+"""Build the canonical PivtMedia campaign logo variants from the v2 logo (Instrument Sans, inline brackets)."""
 import os
+import shutil
 
 import paths
 from PIL import Image
 
-SRC = os.path.join(paths.ROOT, os.pardir, "pivt-media-portal",
-                   "src", "assets", "logo-barcode.png")
 OUT = paths.LOGO_DIR
+SRC = os.path.join(OUT, "v2")
 os.makedirs(OUT, exist_ok=True)
 
-im = Image.open(SRC).convert("RGBA")
-im = im.crop(im.split()[-1].getbbox())  # trim transparent padding
-w, h = im.size
-print(f"trimmed source: {w}x{h}")
-
-
-def is_orange(r, g, b):
-    """Accent bar: strongly red-dominant."""
-    return r > 150 and r - g > 60 and r - b > 60
-
-
-def recolor(src, ink):
-    """Recolor non-accent ink pixels to `ink`, preserving alpha and the orange bar."""
-    out = Image.new("RGBA", src.size)
-    src_px, out_px = src.load(), out.load()
-    for y in range(src.size[1]):
-        for x in range(src.size[0]):
-            r, g, b, a = src_px[x, y]
-            if a == 0:
-                out_px[x, y] = (0, 0, 0, 0)
-            elif is_orange(r, g, b):
-                out_px[x, y] = (255, 92, 0, a)
-            else:
-                out_px[x, y] = (*ink, a)
-    return out
+dark_ink = Image.open(os.path.join(SRC, "pivt-logo-v2.png")).convert("RGBA")         # ink   -> for light photos
+light_ink = Image.open(os.path.join(SRC, "pivt-logo-v2-cream.png")).convert("RGBA")  # cream -> for dark photos
+print(f"source: {dark_ink.size[0]}x{dark_ink.size[1]}")
 
 
 def flatten(src, bg):
     base = Image.new("RGBA", src.size, (*bg, 255))
     return Image.alpha_composite(base, src)
 
-
-dark_ink = recolor(im, (18, 18, 18))    # black ink  -> for light photos
-light_ink = recolor(im, (255, 255, 255))  # white ink -> for dark photos
 
 variants = {
     "pivt-logo-transparent-black.png": dark_ink,
@@ -55,3 +30,7 @@ for name, img in variants.items():
     path = os.path.join(OUT, name)
     img.save(path)
     print(f"wrote {name}  {img.size}  mode={img.mode}")
+
+for src, name in [("pivt-logo-v2.svg", "pivt-logo-black.svg"), ("pivt-logo-v2-cream.svg", "pivt-logo-white.svg")]:
+    shutil.copyfile(os.path.join(SRC, src), os.path.join(OUT, name))
+    print(f"wrote {name}")
