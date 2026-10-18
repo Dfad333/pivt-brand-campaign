@@ -6,6 +6,23 @@ Two documents matter here:
   Hand this to a designer or content agent.
 - **`README.md`** (this file) — the *operating* doc. How to actually produce a poster.
 
+## Content directions
+
+Three approved directions, each with its own module and its own section in the brief.
+Everything renders into `final/` on this device only — nothing content goes to git.
+
+| Direction | Module | Output | Credits | Brief |
+|---|---|---|---|---|
+| **Posters** — organic feed, photo + type | `layouts.py` | `final/` | ~4 per photo (type-only layouts free) | §3–§10 |
+| **Ad creatives** — paid social, type only | `ads.py` | `final/ads/` | none | §11 |
+| **Story highlights** — profile covers + stories | `highlights.py` | `final/highlights/` | none | §12 |
+
+```bash
+cd studio
+python ads.py          # every ad, every format
+python highlights.py   # every highlight cover and story
+```
+
 ---
 
 ## The one thing to understand
@@ -63,6 +80,7 @@ and a headline auto-scaling into the rule beneath it.
 | `poster.py` | Core constants, type helpers, contrast tools (`mean_lum`, `contrast_ink`, `scrim_bottom`), `split`, `disc`. |
 | `poster2.py` … `poster10.py` | Layout implementations. Grouped by when they were built, not by what they do — use `layouts.py` instead of importing these directly. |
 | **`ads.py`** | **Paid-social ad creatives**, type only. `python ads.py` renders every concept, every format, into `final/ads/`. See CREATIVE-BRIEF §11. |
+| **`highlights.py`** | **Instagram story highlights** — progress-barcode covers + 3 stories per highlight. `python highlights.py`. See CREATIVE-BRIEF §12. |
 | `mockup.py` | Places a finished poster **into** a photo as a physical print. `probe()` then `place()`. |
 | `contact_sheet.py` | Rebuilds `CONTACT-SHEET.jpg` from everything in `final/`. |
 | `build_logos.py` | Regenerates the four logo overlay variants from the v2 masters in `brand/logo/v2/`. |

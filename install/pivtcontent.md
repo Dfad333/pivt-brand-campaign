@@ -15,6 +15,15 @@ client portal, the onboarding SOP, or outreach. If a request pulls in those, fla
 3. `E:\PivtMedia\brand-campaign\references\REFERENCES.md` — the two inspiration accounts
    decoded, plus saved reference images in `references/boegow/`.
 
+## Content directions
+
+Three approved directions — pick the one the request belongs to (README "Content directions"):
+- **Posters** (`layouts.py`, brief §3–§10) — organic feed, Higgsfield photo + type.
+- **Ad creatives** (`ads.py`, brief §11) — paid social, type only, no credits.
+- **Story highlights** (`highlights.py`, brief §12) — profile covers + inside stories, no credits.
+
+New content renders into `final/` and stays on this device; only setup changes go to git.
+
 ## The core method — do not skip this
 
 **These are designed posters, not AI images.** Higgsfield generates ONLY the photograph,

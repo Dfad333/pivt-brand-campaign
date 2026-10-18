@@ -405,7 +405,41 @@ loud/quiet against each other rather than two loud ones.
 
 ---
 
-## 12. ASSET LOCATIONS
+## 12. STORY HIGHLIGHTS (Instagram profile)
+
+Approved direction, Oct 2026. **Type only — no image credits.** Module: `studio/highlights.py`.
+Run `python highlights.py` to render every cover and story into `final/highlights/` (local only).
+
+**Covers — "follow the signal".** Ink ground, the guidelines' *progress barcode* (the full lockup
+barcode) with the orange signal bar one step further right per highlight, and a Mono index
+(`01`, `02`, `03`) beneath. Read together on the profile, the row of circles moves left to right.
+- This is the progress device, **not the logo mark** — the mark's signal bar never moves.
+- The signal bar is widened (12 units, with a cleared gap either side) so it reads at avatar
+  size; at its true 8-unit width it vanished. Check covers as ~180px circles before shipping.
+- Keep everything inside the centre circle Instagram crops to.
+
+**Inside stories — 3 frames per highlight, 9:16**, built on the ad frame from `ads.py` (micro
+row `[ SECTION ]` + `01 / 03`, v2 logo foot, 14% / 20% safe zone):
+1. **Hook frame** (Paper) — Archivo Black stack, square orange full stop.
+2. **Index frame** (Paper) — hairline-divided list: Mono numeral, ExtraBold name, one plain line.
+3. **Action frame** (Ink) — sign-off, `[ BOOK A CALL ] →`, and a real contact line.
+
+**Current set:**
+
+| # | Highlight | 1 · hook | 2 · index | 3 · action |
+|---|---|---|---|---|
+| 01 | About | WE MAKE BRANDS IMPOSSIBLE TO SCROLL PAST. | OUR ORDER. (strategy / taste / results) | PROOF. NOT PROMISES. · pivtmedia.com |
+| 02 | Services | WHAT WE MAKE. (content, paid social, campaigns, production, web) | ONE IDEA PER PIECE. | TELL US WHAT YOU NEED. · contact@pivtmedia.com |
+| 03 | Process | PLAN. PRODUCE. POST. RUN. | HOW IT WORKS. (one line per step) | START WITH THE PLAN. · pivtmedia.com |
+
+Copy is sourced from the Brand Guidelines (purpose, order of operations, services boilerplate)
+and the website's "plan, produce and post — and run it". **No numbers** — the website's view and
+follower stats are not used. To add a highlight (e.g. Work), append it to `HIGHLIGHTS` and add
+its three frames in `build_all()`; the covers re-space the signal automatically.
+
+---
+
+## 13. ASSET LOCATIONS
 
 - `brand-campaign/final/` — 47 approved posters
 - `brand-campaign/archive/` — 12 rejected, with `WHY-ARCHIVED.md` explaining each
@@ -420,5 +454,6 @@ loud/quiet against each other rather than two loud ones.
   Change a headline there and re-run; it re-composites type only, so it costs nothing.
 - `brand/fonts/` — Archivo + JetBrains Mono (OFL), loaded first by `studio/paths.py`
 - `final/ads/` — rendered ad creatives (local only)
+- `final/highlights/` — story highlight covers + inside stories (local only)
 - `brand/logo/` — the four v2 logo variants (rebuild from `brand/logo/v2/` with `studio/build_logos.py`)
 - `.claude/commands/pivtcontent.md` — the scoped entry point; run `/pivtcontent` to start
