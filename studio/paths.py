@@ -43,12 +43,14 @@ def pick_font(*candidates):
     )
 
 
+_BRAND = os.path.join(ROOT, "brand", "fonts")  # Archivo + JetBrains Mono, shipped in the repo
 _WIN = r"C:\Windows\Fonts"
 _MAC = "/System/Library/Fonts/Supplemental"
 _LIN = "/usr/share/fonts/truetype"
 
 # Bold grotesque — every headline in the system. Helvetica-like, tight, neutral.
 F_BOLD = pick_font(
+    os.path.join(_BRAND, "Archivo-Bold.ttf"),
     os.path.join(_WIN, "arialbd.ttf"),
     os.path.join(_MAC, "Arial Bold.ttf"),
     "/System/Library/Fonts/Helvetica.ttc",
@@ -58,6 +60,7 @@ F_BOLD = pick_font(
 
 # Regular weight — micro-copy and captions.
 F_REG = pick_font(
+    os.path.join(_BRAND, "Archivo-Regular.ttf"),
     os.path.join(_WIN, "arial.ttf"),
     os.path.join(_MAC, "Arial.ttf"),
     "/System/Library/Fonts/Helvetica.ttc",
@@ -69,6 +72,7 @@ F_REG = pick_font(
 # register depends on this being genuinely light, so a bold fallback would be wrong;
 # fall back through the thinnest things available before giving up on regular.
 F_LIGHT = pick_font(
+    os.path.join(_BRAND, "Archivo-Thin.ttf"),
     os.path.join(_WIN, "segoeuil.ttf"),
     os.path.join(_MAC, "HelveticaNeue.ttc"),
     "/System/Library/Fonts/Helvetica.ttc",
@@ -84,3 +88,10 @@ F_BAHN = pick_font(
     os.path.join(_MAC, "Arial Narrow Bold.ttf"),
     F_BOLD,
 )
+
+# Brand-guideline faces with no system equivalent worth falling back to.
+# Black is the Signal-register headline weight; Mono carries labels, brackets and specs.
+F_BLACK = pick_font(os.path.join(_BRAND, "Archivo-Black.ttf"), F_BOLD)
+F_XBOLD = pick_font(os.path.join(_BRAND, "Archivo-ExtraBold.ttf"), F_BOLD)
+F_MONO = pick_font(os.path.join(_BRAND, "JetBrainsMono-Medium.ttf"), F_REG)
+F_MONO_BOLD = pick_font(os.path.join(_BRAND, "JetBrainsMono-Bold.ttf"), F_BOLD)

@@ -62,6 +62,7 @@ and a headline auto-scaling into the rule beneath it.
 | **`layouts.py`** | **Start here.** Registry of all 21 layouts by friendly name, plus `build()`. Run `python layouts.py` to list them. |
 | `poster.py` | Core constants, type helpers, contrast tools (`mean_lum`, `contrast_ink`, `scrim_bottom`), `split`, `disc`. |
 | `poster2.py` … `poster10.py` | Layout implementations. Grouped by when they were built, not by what they do — use `layouts.py` instead of importing these directly. |
+| **`ads.py`** | **Paid-social ad creatives**, type only. `python ads.py` renders every concept, every format, into `final/ads/`. See CREATIVE-BRIEF §11. |
 | `mockup.py` | Places a finished poster **into** a photo as a physical print. `probe()` then `place()`. |
 | `contact_sheet.py` | Rebuilds `CONTACT-SHEET.jpg` from everything in `final/`. |
 | `build_logos.py` | Regenerates the four logo overlay variants from the v2 masters in `brand/logo/v2/`. |

@@ -36,9 +36,9 @@ concrete wall). Even then, check it letter by letter.
 | Accent | **`#FF5C00`** orange — the only saturated colour in most posters |
 | Ink | **`#121212`** near-black |
 | Paper | **`#F7F5F1`** warm cream |
-| Headline face | Helvetica Now / Neue Haas Grotesk Display **Bold** (Arial Bold as substitute) |
+| Headline face | **Archivo** (Black for Signal headlines, Thin for the quiet register), per Brand Guidelines V01. Shipped in `brand/fonts/`; Arial is only the fallback |
 | Headline tracking | **−2%** (tight) |
-| Micro-copy | Same family, ~19–20px, **+1.5 letterspacing**, ALL CAPS |
+| Micro-copy | **JetBrains Mono** for labels, brackets and specs (ads); poster layouts still set micro-copy in Archivo Bold, ~19–20px, ALL CAPS |
 | Logo | PivtMedia barcode lockup **v2** (barcode + `⌊ PIVT MEDIA ⌋` in Instrument Sans), ~13% of canvas width |
 
 **Logo files** live in `brand/logo/` (v2 masters in `brand/logo/v2/`, the retired v1 in
@@ -361,7 +361,51 @@ Use Higgsfield `remove_background` — it takes an uploaded `media_id` or a gene
 
 ---
 
-## 11. ASSET LOCATIONS
+## 11. AD CREATIVES (paid social)
+
+Approved direction, Oct 2026. **Type only — no image credits.** An ad has a different job
+from a poster: stop the thumb in one second, make one point, ask for one action. Goal and
+audience for now: **Columbus-area businesses → book a call.**
+
+Module: `studio/ads.py`. Run `python ads.py` to render every concept into `final/ads/`
+(local only, ignored by git). Copy lives in each function's arguments — edit and re-run.
+
+**The frame — every ad carries it, in this order:**
+1. **Micro row** — JetBrains Mono labels left and right, hairline beneath.
+   A dry bracket on the left (`[ SPONSORED, OBVIOUSLY ]`), location on the right.
+2. **Hook** — Archivo Black caps, −3% tracking, leading 0.9, fitted to the width.
+3. **Argument** — one or two plain sentences, Archivo Regular.
+4. **CTA block** — solid Ink rectangle, Paper Mono `[ BOOK A CALL ] →`. Inverts on Ink grounds.
+5. **Foot** — hairline, then the v2 logo bottom-centre (run at ~16% width: 13% reads small
+   on a phone).
+
+**House devices for ads:**
+- **The square full stop.** The hook's full stop is a solid orange square — it is the one
+  Signal shape, so nothing else on the ad is orange (except the Mark-up concept, where the
+  grease pencil is the orange).
+- One idea per ad. The ad should *prove* the point while it's being looked at.
+- No invented numbers, ever. Positioning and wit only.
+
+**Formats.** Rendered at 2× and downsampled. 4:5 feed 1080×1350 · 9:16 story 1080×1920
+(everything inside the 14% top / 20% bottom safe zone) · 1:1 1080×1080 · 16:9 1920×1080.
+
+**Approved concepts:**
+
+| # | Concept | Format | Idea |
+|---|---|---|---|
+| 01 | You stopped. | 4:5 + 9:16 | The ad that admits it's an ad. "THAT'S THE JOB." |
+| 02 | We'd cut this. | 4:5 + 9:16 | A bland ad (built from the guidelines' "never like this" phrases) marked up in orange grease pencil. |
+| 03 | Just signal. | 4:5 | A pale wall of banned buzzwords; one clear Ink line knocked through it. |
+| 04 | You paid for noise. | 1:1 | Ink ground, till slip for "the average ad" — attention: NONE. |
+| 05 | Brands done blending in. | 9:16 | Quiet register on Ink: thin, tracked, centred. The contrast piece. |
+| 06 | Every ad answers three questions. | 16:9 | Hook left, numbered index right — the ad answers its own test. |
+
+**Next steps when testing:** 2–3 hook variants per concept (one-line change each), and run
+loud/quiet against each other rather than two loud ones.
+
+---
+
+## 12. ASSET LOCATIONS
 
 - `brand-campaign/final/` — 47 approved posters
 - `brand-campaign/archive/` — 12 rejected, with `WHY-ARCHIVED.md` explaining each
@@ -374,5 +418,7 @@ Use Higgsfield `remove_background` — it takes an uploaded `media_id` or a gene
 - `brand-campaign/studio/` — the code. `layouts.py` is the entry point.
 - `brand-campaign/studio/recipes/rebuild_all.py` — **every poster, reproducible in one run.**
   Change a headline there and re-run; it re-composites type only, so it costs nothing.
+- `brand/fonts/` — Archivo + JetBrains Mono (OFL), loaded first by `studio/paths.py`
+- `final/ads/` — rendered ad creatives (local only)
 - `brand/logo/` — the four v2 logo variants (rebuild from `brand/logo/v2/` with `studio/build_logos.py`)
 - `.claude/commands/pivtcontent.md` — the scoped entry point; run `/pivtcontent` to start
